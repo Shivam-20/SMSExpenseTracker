@@ -10,7 +10,7 @@ import UniformTypeIdentifiers
 
 class ShareViewController: UIViewController {
 
-    static let appGroupID  = "group.com.yourapp.SMSExpenseTracker"
+    static let appGroupID  = "group.com.example.SMSExpenseTracker"
     static let pendingKey  = "pendingSharedMessages"
 
     override func viewDidLoad() {

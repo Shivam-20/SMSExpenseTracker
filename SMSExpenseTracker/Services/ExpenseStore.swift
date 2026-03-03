@@ -8,7 +8,7 @@ import Combine
 final class ExpenseStore: ObservableObject {
 
     static let shared = ExpenseStore()
-    static let appGroupID = "group.com.yourapp.SMSExpenseTracker"
+    static let appGroupID = "group.com.example.SMSExpenseTracker"
 
     @Published var expenses: [Expense] = []
 

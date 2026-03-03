@@ -1,0 +1,33 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build and export IPA for testing"
+  lane :build do
+    match(type: "development", readonly: true)
+    
+    build_app(
+      workspace: "SMSExpenseTracker.xcworkspace",
+      scheme: "SMSExpenseTracker",
+      export_method: "development",
+      output_directory: "./build",
+      clean: true
+    )
+    
+    UI.message("IPA built at ./build/")
+  end
+
+  desc "Build for Ad-Hoc distribution"
+  lane :adhoc do
+    match(type: "adhoc", readonly: true)
+    
+    build_app(
+      workspace: "SMSExpenseTracker.xcworkspace",
+      scheme: "SMSExpenseTracker",
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      clean: true
+    )
+    
+    UI.success("Ad-Hoc IPA built successfully!")
+  end
+end

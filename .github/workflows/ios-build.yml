@@ -1,0 +1,37 @@
+name: iOS Build (Simulator)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+
+      - name: Install bundle
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Build for Simulator
+        run: |
+          xcodebuild -project SMSExpenseTracker.xcodeproj \
+            -scheme SMSExpenseTracker \
+            -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app
+          path: build/Build/Products/*.app
